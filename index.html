@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agrisakha - Farmer Photo Upload</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .container {
+      margin-top: 50px;
+    }
+    .image-preview {
+      width: 100%;
+      margin-top: 20px;
+    }
+    .image-preview img {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="text-center">Agrisakha - Farmer Photo Upload</h1>
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <form id="uploadForm">
+          <div class="form-group">
+            <input type="file" class="form-control-file" id="imageInput" accept="image/*" required>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Upload Photo</button>
+        </form>
+        <div class="image-preview d-none">
+          <img src="" alt="Uploaded Image" id="uploadedImage">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('uploadForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      var input = document.getElementById('imageInput');
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById('uploadedImage').src = e.target.result;
+          document.querySelector('.image-preview').classList.remove('d-none');
+        }
+        reader.readAsDataURL(input.files[0]);
+      }
+    });
+  </script>
+</body>
+</html>
